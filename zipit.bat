@@ -1,0 +1,1 @@
+7z.exe a -t7z d:\zipz\LocalDeployProjectUpdater.7z  -mx0 -xr!bin -xr!obj
