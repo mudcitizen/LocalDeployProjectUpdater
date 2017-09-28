@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocalDeployProjectUpdaterUtility.Logging
+namespace LocalDeployProjectUpdaterUtility
 {
-    public class TextFileLogger
+    public class TextFileLogger : ILogger
     {
         private String _FileName;
 
@@ -18,7 +18,15 @@ namespace LocalDeployProjectUpdaterUtility.Logging
         {
             _FileName = fileName;
             if (File.Exists(_FileName))
+            {
                 File.Delete(_FileName);
+            }
+            else
+            {
+                String path = Path.GetDirectoryName(fileName);
+                if ((!String.IsNullOrEmpty(path)) && (!Directory.Exists(path)))
+                    Directory.CreateDirectory(path);
+            }
         }
 
         public void Log(string logText)
