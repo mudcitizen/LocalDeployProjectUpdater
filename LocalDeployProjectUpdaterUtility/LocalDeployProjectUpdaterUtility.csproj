@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModuleParameters\HostModuleParametersProvider.cs" />
     <Compile Include="Infrastructure\IMismatchFinder.cs" />
     <Compile Include="Infrastructure\IProjectDifferencesProvider.cs" />
     <Compile Include="Infrastructure\MismatchFinder.cs" />
@@ -48,6 +49,10 @@
     <Compile Include="Infrastructure\ProjectDifferencesProvider.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Logging\TextFileLogger.cs" />
+    <Compile Include="ModuleParameters\IModuleParametersProvider.cs" />
+    <Compile Include="ModuleParameters\ModuleParameters.cs" />
+    <Compile Include="ModuleParameters\ModuleParametersPersistor.cs" />
+    <Compile Include="ModuleParameters\POSModuleParametersProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

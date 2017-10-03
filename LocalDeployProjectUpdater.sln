@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalDeployProjectUpdaterUt
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalDeployProjectUpdaterUtility.Tests", "LocalDeployProjectUpdaterUtility.Tests\LocalDeployProjectUpdaterUtility.Tests.csproj", "{943EF947-6490-489F-9C95-D379E03FF2E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalDeployProjectUpdater.Experiments", "LocalDeployProjectUpdater.Experiments\LocalDeployProjectUpdater.Experiments.csproj", "{51AE01D4-824C-40FF-92DD-2979B6F1F725}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{943EF947-6490-489F-9C95-D379E03FF2E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{943EF947-6490-489F-9C95-D379E03FF2E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{943EF947-6490-489F-9C95-D379E03FF2E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51AE01D4-824C-40FF-92DD-2979B6F1F725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51AE01D4-824C-40FF-92DD-2979B6F1F725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51AE01D4-824C-40FF-92DD-2979B6F1F725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51AE01D4-824C-40FF-92DD-2979B6F1F725}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
