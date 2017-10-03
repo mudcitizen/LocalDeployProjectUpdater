@@ -30,7 +30,7 @@ namespace LocalDeployProjectUpdaterUtility
                 "RS-ZVCR.FXP"
             };
 
-            parms.ExcludedFiles = excludedFiles.ToList();
+            parms.ExcludedFiles = excludedFiles.OrderBy(fileName => fileName).ToList();
             return parms;
         }
 

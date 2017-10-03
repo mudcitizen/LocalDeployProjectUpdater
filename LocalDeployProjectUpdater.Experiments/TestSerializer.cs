@@ -17,16 +17,22 @@ namespace LocalDeployProjectUpdater.Experiments
 
             if (File.Exists(fileName))
                 File.Delete(fileName);
-            ModuleParameters parms = new HostModuleParametersProvider().GetParameters();
+            ModuleParameters parms = new HostModuleParametersProvider().GetModuleParameters();
 
-            XmlSerializer s = new XmlSerializer(typeof(ModuleParameters));
-            using (TextWriter w = new StreamWriter(fileName)) {
-                s.Serialize(w, parms);
-            }
-            //ModuleParametersPersistor p = new ModuleParametersPersistor();
-            //p.Write(fileName, parms);
+            //XmlSerializer s = new XmlSerializer(typeof(ModuleParameters));
+            //using (TextWriter w = new StreamWriter(fileName)) {
+            //    s.Serialize(w, parms);
+            //}
+            ModuleParametersPersistor p = new ModuleParametersPersistor();
+            p.Write(fileName, parms);
 
             Assert.IsTrue(File.Exists(fileName));
+
+            ModuleParameters readParms = p.Read(fileName);
+            Assert.AreEqual(parms.ContentSubFolder, readParms.ContentSubFolder);
+            Assert.AreEqual(parms.ExcludedFiles.Count,readParms.ExcludedFiles.Count);
+            foreach (String fn in parms.ExcludedFiles)
+                Assert.IsTrue(readParms.ExcludedFiles.Contains(fn));
         }
     }
 }

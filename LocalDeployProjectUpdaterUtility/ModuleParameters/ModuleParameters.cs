@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LocalDeployProjectUpdaterUtility
 {
 
-    [Serializable]
+    //[Serializable]
     public class ModuleParameters 
     {
         public string ContentSubFolder = String.Empty;
