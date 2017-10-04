@@ -8,7 +8,7 @@ namespace LocalDeployProjectUpdaterUtility
 {
     public static class Constants
     {
-        public const String DefaultFileItemType = "Content";
-        public const String AppSettingsFileItemTypeKey = "FileItemType";
+        public const String DefaultProjectItemType = "Content";
+        public const String AppSettingsProejctItemTypeKey = "ProjectItemType";
     }
 }

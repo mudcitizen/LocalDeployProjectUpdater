@@ -11,19 +11,17 @@ namespace LocalDeployProjectUpdaterUtility
 {
     public class ProjectUpdater
     {
-        IMismatchFinder _MismatchFinder;
-        readonly String _FileItemType;
+        readonly String _ProjectItemType;
 
-        public ProjectUpdater() : this(new MismatchFinder()) { }
-
-        public ProjectUpdater(IMismatchFinder mismatchFindfer) {
-            _MismatchFinder = mismatchFindfer;
-            _FileItemType = ConfigurationManager.AppSettings[Constants.DefaultFileItemType];
-            if (_FileItemType == null)
-                _FileItemType = Constants.DefaultFileItemType;
+        public ProjectUpdater()
+        {
+            _ProjectItemType = ConfigurationManager.AppSettings[Constants.DefaultProjectItemType];
+            if (_ProjectItemType == null)
+                _ProjectItemType = Constants.DefaultProjectItemType;
         }
 
-        public ProjectDifferences Update(String csProjFileName, String vfpDirectoryName, String moduleParametersFileName) {
+        public void Update(String csProjFileName, String vfpDirectoryName, String moduleParametersFileName)
+        {
 
             ModuleParameters moduleParms;
             ModuleParametersPersistor persistor = new ModuleParametersPersistor();
@@ -37,46 +35,46 @@ namespace LocalDeployProjectUpdaterUtility
                 persistor.Write(moduleParametersFileName, moduleParms);
             }
 
-            IEnumerable<String> vfpProjFiles = Directory.GetFiles(vfpDirectoryName);
-            /*
-             * IList<ProjectItem> contentItems = project.Items.Where(pi => pi.ItemType == "Content" && pi.EvaluatedInclude.StartsWith(@"h\")).OrderBy(pi => pi.EvaluatedInclude).Select(pi => pi).ToList();
-            IEnumerable<String> fileNames = contentItems.Select(ci => Path.GetFileName(ci.EvaluatedInclude)).ToList();
-             */
             Project project = new Project(csProjFileName);
-            IEnumerable<String> csProjFiles = GetProjectContentFiles(project, moduleParms);
+            String projectFolderName = Path.GetDirectoryName(csProjFileName);
 
-            ProjectDifferences projDiffs = new ProjectDifferencesProvider(_MismatchFinder).GetDifferences(csProjFiles, vfpProjFiles);
+            // Make sure the H folder exists 
+            String contentFolderName = Path.Combine(projectFolderName, moduleParms.ContentSubFolder);
 
-            //TODO get rid of these constants 
-            KeyValuePair<String, String> kvp = new KeyValuePair<string, string>("CopyToOutputDirectory", "PreserveNewest");
-            IEnumerable<KeyValuePair<String, String>> metadata = new List<KeyValuePair<String, String>>() { kvp };
-            //TODO Filter out custom forms etc
-
-            // Make sure the H folders 
-            String contentFolderName = Path.GetDirectoryName(csProjFileName) + Path.DirectorySeparatorChar + moduleParms.ContentSubFolder;
             if (!Directory.Exists(contentFolderName))
                 Directory.CreateDirectory(contentFolderName);
 
-            foreach (String fileName in projDiffs.Additions) {
-                String csProjItemName = (moduleParms.ContentSubFolder + Path.DirectorySeparatorChar + fileName).ToUpper();
-                String copyToFileName = contentFolderName + Path.DirectorySeparatorChar + fileName;
-                String copyFromFileName = vfpDirectoryName + Path.DirectorySeparatorChar + fileName;
-                File.Copy(copyFromFileName, copyToFileName);
-                project.AddItem(_FileItemType, moduleParms.ContentSubFolder + Path.DirectorySeparatorChar + fileName, metadata);
+            // Remove current content from Project
+            IEnumerable<ProjectItem> currentContent = project.Items
+                .Where(pi => (pi.ItemType == _ProjectItemType) && (pi.EvaluatedInclude.StartsWith(moduleParms.ContentSubFolder + Path.DirectorySeparatorChar)))
+                .OrderBy(pi => pi.EvaluatedInclude);
+            project.RemoveItems(currentContent);
+
+
+            // Remove current content from Directory
+            foreach (String fileName in Directory.GetFiles(contentFolderName))
+            {
+                if (File.Exists(fileName))
+                    File.Delete(fileName);
+            }
+
+
+            //TODO get rid of these constants 
+            IEnumerable<KeyValuePair<String, String>> metadata = new List<KeyValuePair<String, String>>() { new KeyValuePair<string, string>("CopyToOutputDirectory", "PreserveNewest") };
+            //TODO Filter out custom forms etc
+
+
+            foreach (String fileName in Directory.GetFiles(vfpDirectoryName))
+            {
+                String justFileName = Path.GetFileName(fileName).ToUpper();
+                String csProjItemName = Path.Combine(moduleParms.ContentSubFolder, justFileName);
+                String copyToFileName = Path.Combine(contentFolderName, justFileName);
+                File.Copy(fileName, copyToFileName);
+                project.AddItem(_ProjectItemType, Path.Combine(moduleParms.ContentSubFolder, justFileName), metadata);
             }
 
             project.Save();
 
-            return projDiffs;
         }
-
-        public IEnumerable<String> GetProjectContentFiles(Project project, ModuleParameters moduleParms) {
-            return project.Items
-                .Where(pi => (pi.ItemType == _FileItemType) && (pi.EvaluatedInclude.StartsWith(moduleParms.ContentSubFolder + Path.DirectorySeparatorChar)))
-                .OrderBy(pi => pi.EvaluatedInclude)
-                .Select(pi => Path.GetFileName(pi.EvaluatedInclude))
-                .ToList();
-        }
-
     }
 }

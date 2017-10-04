@@ -26,7 +26,7 @@ namespace LocalDeployProjectUpdaterUtility.Tests
                 File.Delete(moduleParmsFileName);
 
 
-            ProjectDifferences diffs = updater.Update(_CsProjectFileName, Constants.VfpProjectFolderName, moduleParmsFileName);
+            updater.Update(_CsProjectFileName, Constants.VfpProjectFolderName, moduleParmsFileName);
             
             Assert.IsTrue(File.Exists(moduleParmsFileName));
 
