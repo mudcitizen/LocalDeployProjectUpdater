@@ -8,10 +8,16 @@ namespace LocalDeployProjectUpdaterUtility
 {
 
     //[Serializable]
-    public class ModuleParameters 
+    public class ModuleParameters
     {
-        public string ContentSubFolder = String.Empty;
-        public List<string> ExcludedFiles = new List<String>();
+        public string ContentSubFolder { get; set; }
+        public List<string> ExcludedFiles { get; set; }
+
+        public ModuleParameters()
+        {
+            ContentSubFolder = String.Empty;
+            ExcludedFiles = new List<String>();
+        }
     }
 
 }

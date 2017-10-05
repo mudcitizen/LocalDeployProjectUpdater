@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="MismatchFinderTests.cs" />
+    <Compile Include="ModuleParametersPersistorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextFileLoggerTests.cs" />
     <Compile Include="ProjectUpdaterTest.cs" />
