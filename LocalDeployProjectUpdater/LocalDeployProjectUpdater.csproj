@@ -42,11 +42,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="CommandLineArgument.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="DirectoryCommandLineArgument.cs" />
+    <Compile Include="FileNameCommandLineArgument.cs" />
+    <Compile Include="UpdateProject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LocalDeployProjectUpdaterUtility\LocalDeployProjectUpdaterUtility.csproj">
+      <Project>{4e2e05e7-53a5-40ce-bb78-0908db6e607f}</Project>
+      <Name>LocalDeployProjectUpdaterUtility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
