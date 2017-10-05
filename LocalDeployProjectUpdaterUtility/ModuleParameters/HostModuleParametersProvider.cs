@@ -31,6 +31,7 @@ namespace LocalDeployProjectUpdaterUtility
             };
 
             parms.ExcludedFiles = excludedFiles.OrderBy(fileName => fileName).ToList();
+            parms.ProductName = "Host";
             return parms;
         }
 

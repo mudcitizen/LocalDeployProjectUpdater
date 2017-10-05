@@ -18,9 +18,11 @@ namespace LocalDeployProjectUpdaterUtility.Tests
             Assert.IsTrue(!File.Exists(fileName));
 
             ModuleParameters exp = new HostModuleParametersProvider().GetModuleParameters();
+            exp.Version = "22.0.0.14";
 
             Assert.IsFalse(String.IsNullOrEmpty(exp.ContentSubFolder));
             Assert.IsFalse(exp.ExcludedFiles.Count == 0);
+            Assert.IsFalse(String.IsNullOrEmpty(exp.ProductName));
             ModuleParametersPersistor persistor = new ModuleParametersPersistor();
 
             persistor.Write(fileName, exp);
@@ -28,6 +30,8 @@ namespace LocalDeployProjectUpdaterUtility.Tests
 
             ModuleParameters actual = persistor.Read(fileName);
             Assert.AreEqual(exp.ContentSubFolder, actual.ContentSubFolder);
+            Assert.AreEqual(exp.ProductName, actual.ProductName);
+            Assert.AreEqual(exp.Version, actual.Version);
             Assert.AreEqual(exp.ExcludedFiles.Count, actual.ExcludedFiles.Count);
             foreach (String fn in exp.ExcludedFiles)
                 actual.ExcludedFiles.Contains(fn);

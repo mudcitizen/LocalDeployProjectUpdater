@@ -12,11 +12,16 @@ namespace LocalDeployProjectUpdaterUtility
     {
         public string ContentSubFolder { get; set; }
         public List<string> ExcludedFiles { get; set; }
+        public String Version { get; set; }
+        public String ProductName { get; set; }
+
 
         public ModuleParameters()
         {
             ContentSubFolder = String.Empty;
             ExcludedFiles = new List<String>();
+            Version = String.Empty;
+            ProductName = String.Empty;
         }
     }
 

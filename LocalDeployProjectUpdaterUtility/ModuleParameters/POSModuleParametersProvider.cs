@@ -10,7 +10,9 @@ namespace LocalDeployProjectUpdaterUtility
     {
         public ModuleParameters GetModuleParameters()
         {
-            return new ModuleParameters() { ContentSubFolder = "P" };
+            ModuleParameters parms = new ModuleParameters() { ContentSubFolder = "P" };
+            parms.ProductName = "POS";
+            return parms;
         }
     }
 }
