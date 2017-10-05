@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using Microsoft.Build.Evaluation;
 using LocalDeployProjectUpdaterUtility;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -31,5 +34,18 @@ namespace LocalDeployProjectUpdaterUtility.Tests
             Assert.IsTrue(File.Exists(moduleParmsFileName));
 
         }
+
+        [TestMethod]
+        public void SpewProjectProperties()
+        {
+            Project proj = new Project(_CsProjectFileName);
+            ILogger logger = new TextFileLogger(@"c:\temp\ProjectProperties.txt");
+            foreach (ProjectProperty pp in proj.Properties.OrderBy(pp => pp.Name)) {
+                String s = String.Format("Name - {0} ; Value = {1}", pp.Name, pp.EvaluatedValue);
+                logger.Log(s);
+                Debug.WriteLine(s);
+            }
+        }
+
     }
 }
