@@ -36,6 +36,27 @@ namespace LocalDeployProjectUpdaterUtility.Tests
         }
 
         [TestMethod]
+        public void TestProjectPropertiesUpdated()
+        {
+            ProjectUpdater updater = new ProjectUpdater();
+
+            ModuleParameters parms = new HostModuleParametersProvider().GetModuleParameters();
+            const string expVersion = "66.67.68.69";
+            parms.Version = expVersion;
+
+            const string expProductName = "HostWithTheMost";
+            parms.ProductName = expProductName;
+
+            const string moduleParmsFileName = @"C:\temp\TestProjectPropertiesUpdated.xml";
+            new ModuleParametersPersistor().Write(moduleParmsFileName, parms);
+
+            updater.Update(_CsProjectFileName, Constants.VfpProjectFolderName, moduleParmsFileName);
+
+        }
+
+
+
+        //[TestMethod]
         public void SpewProjectProperties()
         {
             Project proj = new Project(_CsProjectFileName);

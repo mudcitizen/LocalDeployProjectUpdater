@@ -59,10 +59,10 @@ namespace LocalDeployProjectUpdaterUtility
             }
 
 
-            //TODO get rid of these constants 
-            IEnumerable<KeyValuePair<String, String>> metadata = new List<KeyValuePair<String, String>>() { new KeyValuePair<string, string>("CopyToOutputDirectory", "PreserveNewest") };
-            //TODO Filter out custom forms etc
-
+            // Add Content 
+            IEnumerable<KeyValuePair<String, String>> metadata = new List<KeyValuePair<String, String>>() {
+                new KeyValuePair<string, string>(Constants.ProjectItemMetadata.CopyToOutputDirectoryName, Constants.ProjectItemMetadata.CopyToOutputDirectoryValue)
+            };
 
             foreach (String fileName in Directory.GetFiles(vfpDirectoryName))
             {
@@ -74,6 +74,19 @@ namespace LocalDeployProjectUpdaterUtility
                     File.Copy(fileName, copyToFileName);
                     project.AddItem(_ProjectItemType, Path.Combine(moduleParms.ContentSubFolder, justFileName), metadata);
                 }
+            }
+
+            // Update Propject Properties 
+            if (!String.IsNullOrEmpty(moduleParms.Version))
+            {
+                foreach (String propertyName in Constants.ProjectProperties.Versions)
+                    project.SetProperty(propertyName, moduleParms.Version);
+            }
+
+            if (!String.IsNullOrEmpty(moduleParms.ProductName))
+            {
+                foreach (String propertyName in Constants.ProjectProperties.ProductNames)
+                    project.SetProperty(propertyName, moduleParms.ProductName);
             }
 
             project.Save();
