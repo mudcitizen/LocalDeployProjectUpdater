@@ -67,10 +67,13 @@ namespace LocalDeployProjectUpdaterUtility
             foreach (String fileName in Directory.GetFiles(vfpDirectoryName))
             {
                 String justFileName = Path.GetFileName(fileName).ToUpper();
-                String csProjItemName = Path.Combine(moduleParms.ContentSubFolder, justFileName);
-                String copyToFileName = Path.Combine(contentFolderName, justFileName);
-                File.Copy(fileName, copyToFileName);
-                project.AddItem(_ProjectItemType, Path.Combine(moduleParms.ContentSubFolder, justFileName), metadata);
+                if ((moduleParms.ExcludedFiles == null) || (!moduleParms.ExcludedFiles.Contains(justFileName, StringComparer.CurrentCultureIgnoreCase)))
+                {
+                    String csProjItemName = Path.Combine(moduleParms.ContentSubFolder, justFileName);
+                    String copyToFileName = Path.Combine(contentFolderName, justFileName);
+                    File.Copy(fileName, copyToFileName);
+                    project.AddItem(_ProjectItemType, Path.Combine(moduleParms.ContentSubFolder, justFileName), metadata);
+                }
             }
 
             project.Save();
