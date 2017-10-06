@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Diagnostics;
 using LocalDeployProjectUpdater;
@@ -15,6 +16,7 @@ namespace LocalDeployProjectUpdater.Tests
         const String _ModuleParmsFile = @"C:\temp\moduleParms.txt";
 
         const String _ValidModuleParmsFile = @"C:\temp\HostParms.xml";
+        const String _ValidVfpDirectory = @"C:\temp\VfpProject";
         const String _ValidCsProjFile = @"C:\ClickOnceSolution\vh\vh.csproj";
 
         ArgsValidator _Validator;
@@ -42,8 +44,7 @@ namespace LocalDeployProjectUpdater.Tests
             Assert.IsTrue(File.Exists(_ValidCsProjFile));
         }
 
-    
-
+  
         [TestMethod]
         public void TestTooFewParms()
         {
@@ -177,6 +178,28 @@ namespace LocalDeployProjectUpdater.Tests
             IValidator v = new CommandLineArgument("WTF", new ModuleParametersFileNameValidator());
             String msg = v.Validate(_ValidModuleParmsFile);
             Assert.IsTrue(String.IsNullOrEmpty(msg));
+        }
+
+        [TestMethod]
+        public void TestRequiredFileTypesDirectoryValidator()
+        {
+            IList<String> reqFileTypes = new List<String>() { "fxp", "exe" };
+      
+            IValidator v = new RequiredFileTypesDirectoryValidator(reqFileTypes);
+            String msg = GetRequiredFileTypesDirectoryValidatorResult(_ValidVfpDirectory, reqFileTypes);
+            Assert.IsTrue(String.IsNullOrEmpty(msg));
+
+            reqFileTypes.Add(Guid.NewGuid().ToString());
+            msg = GetRequiredFileTypesDirectoryValidatorResult(_ValidVfpDirectory, reqFileTypes);
+            Debug.WriteLine(msg);
+            Assert.IsTrue(msg.IndexOf(Constants.MessageText.RequiredFileTypesNotPresent)>=0);
+
+
+        }
+
+        String GetRequiredFileTypesDirectoryValidatorResult(String directoryName, IEnumerable<String> reqFileTypes) {
+            IValidator v = new RequiredFileTypesDirectoryValidator(reqFileTypes);
+            return v.Validate(directoryName);
         }
 
 

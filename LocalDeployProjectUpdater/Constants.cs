@@ -18,11 +18,12 @@ namespace LocalDeployProjectUpdater
         public static class MessageText
         {
             public const String WrongParmCount = "3 parameters are required:";
-            public const String RequiredParameter = "Required Parameter";
-            public const String FileNotFound = "File Not Found";
-            public const String DirectoryNotFound = "Directory Not Found";
+            public const String RequiredParameter = "Required parameter not supplied";
+            public const String FileNotFound = "File Not found";
+            public const String DirectoryNotFound = "Directory not Found";
             public const String NotAValidProjectFile = "Not a valid .NET project file";
-            public const String NotAValidModuleParametersFile = "Not a valid Module Parameters file";
+            public const String NotAValidModuleParametersFile = "Not a valid ModuleParameters file";
+            public const String RequiredFileTypesNotPresent = "Required file types are not present";
         }
     }
 }
