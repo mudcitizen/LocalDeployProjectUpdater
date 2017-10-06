@@ -1,10 +1,11 @@
 ﻿using System;
+using LocalDeployProjectUpdaterUtility;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LocalDeployProjectUpdater
+namespace LocalDeployProjectUpdaterUtility
 {
     public class ArgsValidator
     {

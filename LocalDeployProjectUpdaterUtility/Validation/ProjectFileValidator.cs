@@ -1,7 +1,8 @@
 ﻿using System;
+
 using Microsoft.Build.Evaluation;
 
-namespace LocalDeployProjectUpdater
+namespace LocalDeployProjectUpdaterUtility
 {
     public class ProjectFileValidator : IValidator
     {

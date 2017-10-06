@@ -54,6 +54,14 @@
     <Compile Include="ModuleParameters\POSModuleParametersProvider.cs" />
     <Compile Include="ProjectUpdater.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validation\ArgsValidator.cs" />
+    <Compile Include="Validation\CommandLineArgument.cs" />
+    <Compile Include="Validation\DirectoryCommandLineArgument.cs" />
+    <Compile Include="Validation\FileNameCommandLineArgument.cs" />
+    <Compile Include="Validation\IValidator.cs" />
+    <Compile Include="Validation\ModuleParametersFileNameValidator.cs" />
+    <Compile Include="Validation\ProjectFileValidator.cs" />
+    <Compile Include="Validation\RequiredFileTypesDirectoryValidator.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

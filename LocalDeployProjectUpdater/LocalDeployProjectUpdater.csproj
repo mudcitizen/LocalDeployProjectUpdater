@@ -43,15 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArgsValidator.cs" />
-    <Compile Include="CommandLineArgument.cs" />
-    <Compile Include="Constants.cs" />
-    <Compile Include="DirectoryCommandLineArgument.cs" />
-    <Compile Include="RequiredFileTypesDirectoryValidator.cs" />
-    <Compile Include="FileNameCommandLineArgument.cs" />
-    <Compile Include="IValidator.cs" />
-    <Compile Include="ModuleParametersFileNameValidator.cs" />
-    <Compile Include="ProjectFileValidator.cs" />
     <Compile Include="UpdateProject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
