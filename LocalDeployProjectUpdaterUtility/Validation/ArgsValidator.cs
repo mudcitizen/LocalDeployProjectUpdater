@@ -13,16 +13,12 @@ namespace LocalDeployProjectUpdaterUtility
         {
 
             const int parmCount = 3;
-            const int csProjFileNameIndex = 0;
-            const int vfpDirectoryNameIndex = 1;
-            const int moduleParameterFileNameIndex = 2;
 
 
             IList<CommandLineArgument> cmdLineArgs = new List<CommandLineArgument>()
             {
 
                 new FileNameCommandLineArgument(Constants.ArgumentNames.CsProjectFileName,new ProjectFileValidator()),
-                //new FileNameCommandLineArgument(Constants.ArgumentNames.CsProjectFileName),
                 new DirectoryCommandLineArgument(Constants.ArgumentNames.VfpDirectoryName),
                 new FileNameCommandLineArgument(Constants.ArgumentNames.ModuleParameterFileName)
             };
@@ -50,11 +46,11 @@ namespace LocalDeployProjectUpdaterUtility
             if (String.IsNullOrEmpty(sb.ToString()))
             {
                 // If the ModuleParameters has a RequiredFileTypes list see if the directory fills the bill
-                ModuleParameters parms = new ModuleParametersPersistor().Read(args[moduleParameterFileNameIndex]);
+                ModuleParameters parms = new ModuleParametersPersistor().Read(args[Constants.ArgumentIndexes.ModuleParameterFileNameIndex]);
                 if ((parms.RequiredFileTypes != null) && (parms.RequiredFileTypes.Count > 0))
                 {
                     IValidator v = new RequiredFileTypesDirectoryValidator(parms.RequiredFileTypes);
-                    String msg = v.Validate(args[vfpDirectoryNameIndex]);
+                    String msg = v.Validate(args[Constants.ArgumentIndexes.VfpDirectoryNameIndex]);
                     if (!String.IsNullOrEmpty(msg))
                         sb.AppendLine(msg);
                 }

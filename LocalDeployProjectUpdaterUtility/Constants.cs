@@ -17,6 +17,12 @@ namespace LocalDeployProjectUpdaterUtility
             public const String VfpDirectoryName = "VFP Directory Name";
             public const String ModuleParameterFileName = "Module Parameters File Name";
         }
+        public static class ArgumentIndexes
+        {
+            public const int CsProjectFileNameIndex = 0;
+            public const int VfpDirectoryNameIndex = 1;
+            public const int ModuleParameterFileNameIndex = 2;
+        }
 
         public static class ProjectItemMetadata
         {

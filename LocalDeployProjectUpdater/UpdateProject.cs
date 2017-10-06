@@ -21,7 +21,15 @@ namespace LocalDeployProjectUpdater
 
             if (String.IsNullOrEmpty(messages))
             {
-                WriteLines("Processing");
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Processing");
+                sb.AppendLine();
+                sb.AppendLine(String.Format("{0} - {1}", Constants.ArgumentNames.CsProjectFileName, args[Constants.ArgumentIndexes.CsProjectFileNameIndex]));
+                sb.AppendLine(String.Format("{0} - {1}", Constants.ArgumentNames.VfpDirectoryName, args[Constants.ArgumentIndexes.VfpDirectoryNameIndex]));
+                sb.AppendLine(String.Format("{0} - {1}", Constants.ArgumentNames.ModuleParameterFileName, args[Constants.ArgumentIndexes.ModuleParameterFileNameIndex]));
+                sb.AppendLine();
+
+                WriteLines(sb.ToString());
                 new ProjectUpdater().Update(args[0], args[1], args[2]);
                 WriteLinesAndPressAnyKey("Process complete");
             }
