@@ -14,7 +14,7 @@ namespace LocalDeployProjectUpdater
 
             IList<CommandLineArgument> cmdLineArgs = new List<CommandLineArgument>()
             {
-                new FileNameCommandLineArgument(Constants.ArgumentNames.CsProjectFileName),
+                new FileNameCommandLineArgument(Constants.ArgumentNames.CsProjectFileName,new ProjectFileValidator()),
                 new DirectoryCommandLineArgument(Constants.ArgumentNames.VfpDirectoryName),
                 new FileNameCommandLineArgument(Constants.ArgumentNames.ModuleParameterFileName)
             };

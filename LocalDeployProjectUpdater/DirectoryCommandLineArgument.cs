@@ -9,17 +9,20 @@ namespace LocalDeployProjectUpdater
 {
     public class DirectoryCommandLineArgument : CommandLineArgument
     {
-        public DirectoryCommandLineArgument(string name) : base(name)
-        {
-        }
+        public DirectoryCommandLineArgument(string name) : base(name) {}
+        public DirectoryCommandLineArgument(string name,IValidator validator) : base(name, validator) { }
 
         public override string Validate(string value)
         {
-            String msg = base.Validate(value);
-            if (String.IsNullOrEmpty(msg))
+            String message = base.Validate(value);
+            if (String.IsNullOrEmpty(message))
                 if (!Directory.Exists(value))
-                    msg = GetMessage(Constants.MessageText.DirectoryNotFound);
-            return msg;
+                    message = GetMessage(Constants.MessageText.DirectoryNotFound);
+
+            if ((String.IsNullOrEmpty(message)) && (_Validator != null))
+                message = _Validator.Validate(value);
+
+            return message;
         }
     }
 }

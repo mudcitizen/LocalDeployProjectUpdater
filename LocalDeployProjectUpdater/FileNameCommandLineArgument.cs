@@ -10,6 +10,7 @@ namespace LocalDeployProjectUpdater
     public class FileNameCommandLineArgument : CommandLineArgument
     {
         public FileNameCommandLineArgument(string name) : base(name) {}
+        public FileNameCommandLineArgument(string name,IValidator validator) : base(name, validator) { }
 
         public override string Validate(string value)
         {
@@ -18,6 +19,10 @@ namespace LocalDeployProjectUpdater
                 if (!File.Exists(value))
                     message = GetMessage(Constants.MessageText.FileNotFound);
             }
+
+            if ((String.IsNullOrEmpty(message)) && (_Validator != null))
+                message = _Validator.Validate(value);
+
             return message;
         }
     }

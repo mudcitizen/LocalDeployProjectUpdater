@@ -21,6 +21,8 @@ namespace LocalDeployProjectUpdater
             public const String RequiredParameter = "Required Parameter";
             public const String FileNotFound = "File Not Found";
             public const String DirectoryNotFound = "Directory Not Found";
+            public const String NotAValidProjectFile = "Not a valid .NET project file";
+            public const String NotAValidModuleParametersFile = "Not a valid Module Parameters file";
         }
     }
 }

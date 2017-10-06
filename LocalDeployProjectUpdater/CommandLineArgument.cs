@@ -6,16 +6,21 @@ using System.Threading.Tasks;
 
 namespace LocalDeployProjectUpdater
 {
-    public class CommandLineArgument
+    public class CommandLineArgument : IValidator
     {
         protected String _Name;
+        protected IValidator _Validator;
 
         public String Name { get { return _Name; } }
 
-        public CommandLineArgument(String name)
+        public CommandLineArgument(String name) : this(name, null) { }
+
+        public CommandLineArgument(String name,IValidator validator)
         {
             _Name = name;
+            _Validator = validator;
         }
+
 
         virtual public String Validate(String value)
         {
