@@ -14,7 +14,7 @@ namespace LocalDeployProjectUpdaterUtility
         public List<string> ExcludedFiles { get; set; }
         public String Version { get; set; }
         public String ProductName { get; set; }
-
+        public List<String> RequiredFileTypes { get; set; }
 
         public ModuleParameters()
         {
@@ -22,6 +22,7 @@ namespace LocalDeployProjectUpdaterUtility
             ExcludedFiles = new List<String>();
             Version = String.Empty;
             ProductName = String.Empty;
+            RequiredFileTypes = new List<String>();
         }
     }
 

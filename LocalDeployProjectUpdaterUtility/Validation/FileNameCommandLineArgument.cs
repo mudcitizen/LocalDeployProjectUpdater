@@ -17,7 +17,7 @@ namespace LocalDeployProjectUpdaterUtility
             String message = base.Validate(value);
             if (String.IsNullOrEmpty(message)) {
                 if (!File.Exists(value))
-                    message = GetMessage(Constants.MessageText.FileNotFound);
+                    message = GetMessage(value,Constants.MessageText.FileNotFound);
             }
 
             if ((String.IsNullOrEmpty(message)) && (_Validator != null))

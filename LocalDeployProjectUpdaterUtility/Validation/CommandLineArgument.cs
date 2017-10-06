@@ -25,13 +25,13 @@ namespace LocalDeployProjectUpdaterUtility
         virtual public String Validate(String value)
         {
             if (String.IsNullOrEmpty(value))
-                return GetMessage(Constants.MessageText.RequiredParameter);
+                return GetMessage(value, Constants.MessageText.RequiredParameter);
             else
                 return String.Empty;
         }
 
-        protected String GetMessage(String txt) {
-            return String.Format("{0} - {1}", _Name,txt);
+        protected String GetMessage(String value, String msg) {
+            return String.Format("{0} - {1} - {2}", _Name,value,msg);
         }
 
     }

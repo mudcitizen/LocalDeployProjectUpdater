@@ -17,7 +17,7 @@ namespace LocalDeployProjectUpdaterUtility
             String message = base.Validate(value);
             if (String.IsNullOrEmpty(message))
                 if (!Directory.Exists(value))
-                    message = GetMessage(Constants.MessageText.DirectoryNotFound);
+                    message = GetMessage(value,Constants.MessageText.DirectoryNotFound);
 
             if ((String.IsNullOrEmpty(message)) && (_Validator != null))
                 message = _Validator.Validate(value);

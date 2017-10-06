@@ -90,6 +90,7 @@ namespace LocalDeployProjectUpdaterUtility
             }
 
             project.Save();
+            project.ProjectCollection.UnloadAllProjects();
 
         }
     }

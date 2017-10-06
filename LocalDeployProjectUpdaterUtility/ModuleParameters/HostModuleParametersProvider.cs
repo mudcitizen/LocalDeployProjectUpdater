@@ -32,6 +32,9 @@ namespace LocalDeployProjectUpdaterUtility
 
             parms.ExcludedFiles = excludedFiles.OrderBy(fileName => fileName).ToList();
             parms.ProductName = "Host";
+
+            parms.RequiredFileTypes = new List<String>() { "DLL", "EXE", "FXP" };
+
             return parms;
         }
 

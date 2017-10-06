@@ -14,6 +14,7 @@ namespace LocalDeployProjectUpdaterUtility
             {
                 proj = new Project(value);
                 message = String.Empty;
+                proj.ProjectCollection.UnloadAllProjects();
             }
             catch (Exception ex)
             {

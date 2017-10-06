@@ -13,6 +13,10 @@ namespace LocalDeployProjectUpdater
         static void Main(string[] args)
         {
 
+            /*
+             * C:\ClickOnceSolution\vh\vh.csproj C:\temp\VfpProject C:\temp\HostModuleParms.xml
+             */
+
             String messages = new ArgsValidator().Validate(args);
 
             if (String.IsNullOrEmpty(messages))
@@ -44,7 +48,7 @@ namespace LocalDeployProjectUpdater
         {
             foreach (String line in StringToLines(text))
                 Console.WriteLine(line);
-            PressAnyKey();
+ 
         }
 
         static IEnumerable<String> StringToLines(String text)
